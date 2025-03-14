@@ -104,3 +104,107 @@ document.getElementById("logout").addEventListener("click", () => {
 window.addEventListener('load', () => {
   initAuth0();
 });
+
+// Existing cart logic (with added modal functionality)
+// Cart data
+let cart = [];
+const cartCountElement = document.getElementById('cart-count');
+
+// Add to cart functionality
+function addToCart(productName, productPrice) {
+  cart.push({ name: productName, price: productPrice });
+  updateCartCount();
+  alert(`${productName} added to cart.`);
+}
+
+function updateCartCount() {
+  document.getElementById('cart-count').textContent = cart.length;
+}
+
+// Cart Modal Functionality
+const cartModal = document.getElementById('cart-modal');
+const cartBtn = document.getElementById('cart-btn');
+const closeCart = document.getElementById('close-cart');
+const cartItemsList = document.getElementById('cart-items-list');
+const checkoutBtn = document.getElementById('checkout-btn');
+
+// Show cart modal
+cartBtn.addEventListener('click', () => {
+  cartModal.style.display = 'block';
+  renderCartItems();
+});
+
+// Close cart modal
+document.getElementById('close-cart').onclick = function() {
+  cartModal.style.display = 'none';
+};
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+  if (event.target === cartModal) {
+    cartModal.style.display = 'none';
+  }
+};
+
+// Render Cart Items
+function renderCartItems() {
+  cartItemsList.innerHTML = '';
+  if (cart.length === 0) {
+    cartItemsList.innerHTML = "<p>Your cart is empty.</p>";
+  } else {
+    cart.forEach((item) => {
+      const li = document.createElement('li');
+      li.textContent = `${item.name} - ${item.price}`;
+      document.getElementById('cart-items-list').appendChild(li);
+    });
+  }
+}
+
+// Checkout button functionality
+document.getElementById('checkout-btn').onclick = function() {
+  if (cart.length === 0) {
+    alert('Your cart is empty!');
+  } else {
+    alert('Checkout successful!');
+    cart = [];
+    updateCartCount();
+    cartModal.style.display = 'none';
+  }
+};
+
+// Attach event listeners to dynamically created buttons
+function attachCartListeners() {
+  document.querySelectorAll('.add-cart-btn').forEach(button => {
+    button.addEventListener('click', (e) => {
+      const productCard = e.target.closest('.product-card');
+      const productName = productCard.querySelector('h3').textContent;
+      const productPrice = productCard.querySelector('p').textContent;
+      addToCart(productName, productPrice);
+    });
+  });
+};
+
+// Ensure event listeners are attached after product cards are created
+window.addEventListener('load', () => {
+  updateCartCount();
+  attachCartEventListeners();
+});
+
+// Fix duplicate initialization and listeners
+attachCartEventListeners();
+
+function attachCartEventListeners() {
+  document.querySelectorAll('.add-cart-btn').forEach(button => {
+    button.addEventListener('click', (e) => {
+      const productCard = e.target.closest('.product-card');
+      const productName = productCard.querySelector('h3').textContent;
+      const productPrice = productCard.querySelector('p').textContent;
+      cart.push({ name: productName, price: productPrice });
+      updateCartCount();
+      alert(`${productName} added to cart.`);
+    });
+  });
+}
+
+// Initialize Cart and attach listeners once DOM is loaded
+window.addEventListener('load', attachCartEventListeners);
