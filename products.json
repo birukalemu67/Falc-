@@ -1,0 +1,125 @@
+[
+    {
+        "id": 1,
+        "name":" Stanley Quencher H2.0 Tumbler",
+        "price": 26,
+        "image": "https://m.media-amazon.com/images/I/514aYTw7P7L.__AC_SX300_SY300_QL70_FMwebp_.jpg"
+    },
+    {
+        "id": 2,
+        "name":" SAMSUNG Galaxy S25 Ultra",
+        "price": 1078,
+        "image": "https://m.media-amazon.com/images/I/71yUVEekQWL.__AC_SX300_SY300_QL70_FMwebp_.jpg"
+    },
+    {
+        "id": 3,
+        "name":" SAMSUNG Galaxy Ring",
+        "price": 399,
+        "image": "https://m.media-amazon.com/images/I/71yKqHvtBsL.__AC_SY300_SX300_QL70_FMwebp_.jpg"
+    },
+    {
+        "id": 4,
+        "name":" Amazfit T-Rex 3 Military Smart Watch 48mm",
+        "price": 279,
+        "image": "https://m.media-amazon.com/images/I/71GtgMbKvKL._AC_SX466_.jpg"
+    },
+    {
+        "id": 5,
+        "name":" Apple AirTag",
+        "price": 25,
+        "image": "https://m.media-amazon.com/images/I/71rP7f78eFL._AC_SX522_.jpg"
+    },
+    {
+        "id": 6,
+        "name":" JBL CHARGE 5",
+        "price": 119,
+        "image": "https://m.media-amazon.com/images/I/61qMO3TS2RL.__AC_SX300_SY300_QL70_FMwebp_.jpg"
+    },
+    {
+        "id": 7,
+        "name":" LD07 LOUNGE CHAIR",
+        "price": 209,
+        "image": "https://m.media-amazon.com/images/I/61TzCe1zkdL._AC_SY300_SX300_.jpg"
+    },
+    {
+        "id": 8,
+        "name":" Amazon Fire TV 43",
+        "price": 200,
+        "image": "https://m.media-amazon.com/images/I/61e8khMT3UL._AC_SX569_.jpg"
+    },
+    {
+        "id": 9,
+        "name": "Assassins Creed Mirage",
+        "price": 47,
+        "image": "https://m.media-amazon.com/images/I/51y5R5QaEgL._SX342_SY445_.jpg"
+    },
+    {
+        "id": 10,
+        "name":" Amazon Fire TV Stick 4K",
+        "price": 29,
+        "image": "https://m.media-amazon.com/images/I/61XGGd7lh+L._AC_SY300_SX300_.jpg"
+    },
+    {
+        "id": 11,
+        "name":" Velevet Nonslip Hangers",
+        "price": 200,
+        "image": "https://m.media-amazon.com/images/I/81yeSy2PbtL.__AC_SY300_SX300_QL70_FMwebp_.jpg"
+    },
+    {
+        "id": 12,
+        "name":" Nike Panda Dunks Low",
+        "price": 200,
+        "image": "https://m.media-amazon.com/images/I/713XwiRfa4L._AC_UL320_.jpg"
+    },
+    {
+        "id": 13,
+        "name":" Oversized Acid Wash Heavyweight Black Hoodie",
+        "price": 200,
+        "image": "https://m.media-amazon.com/images/I/71gEWlwpN9L._AC_UL320_.jpg"
+    },
+    {
+        "id": 14,
+        "name":" Red Chanel Long Wallet",
+        "price": 200,
+        "image": "https://m.media-amazon.com/images/I/61xF3eEGFAL._AC_UL500_.jpg"
+    },
+    {
+        "id": 15,
+        "name":" Mens Khaki Cargo Pants",
+        "price": 200,
+        "image": "https://m.media-amazon.com/images/I/61NzUMZGdhL._AC_UL320_.jpg"
+    },
+    {
+        "id": 16,
+        "name":" Beats Headphones",
+        "price": 200,
+        "image": "https://m.media-amazon.com/images/I/51t0IE0zjaL._AC_UY218_.jpg"
+    },
+    {
+        "id": 17,
+        "name":" Airpods 4 Wireless",
+        "price": 200,
+        "image": "https://m.media-amazon.com/images/I/61iBtxCUabL._AC_UY218_.jpg"
+    },
+    {
+        "id": 18,
+        "name":" Chefman Airfryer",
+        "price": 200,
+        "image": "https://m.media-amazon.com/images/I/71s8nikz44L._AC_UY218_.jpg"
+    },
+    {
+        "id": 19,
+        "name":" Tecknet Wireless Mouse",
+        "price": 200,
+        "image": "https://m.media-amazon.com/images/I/71tqvuHgIlL._AC_UY218_.jpg"
+    },
+    {
+        "id": 20,
+        "name":"YPOO Foldable Treadmill",
+        "price": 200,
+        "image": "https://m.media-amazon.com/images/I/61g8zQI4vgL._AC_SX679_.jpg"
+    }
+      
+    
+      
+]

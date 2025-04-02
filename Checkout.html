@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    form {
+      max-width: 600px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    input, textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1em;
+    }
+    button {
+      padding: 10px;
+      background-color: #E8BC0E;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    @media (max-width: 600px) {
+      .item {
+        font-size: 0.9em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Checkout</h1>
+
+    <div id="checkoutList"></div>
+    <div class="totalAmount">
+      Total: $<span id="checkoutTotal">0</span>
+    </div>
+
+    <form id="checkoutForm">
+      <input type="text" name="name" placeholder="Full Name" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <textarea name="address" rows="3" placeholder="Shipping Address" required></textarea>
+      <button type="submit">Place Order</button>
+    </form>
+  </div>
+
+  <script>
+    let products = [];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    fetch('./products.json')
+      .then(res => res.json())
+      .then(data => {
+        products = data;
+        renderCheckout();
+      });
+
+    function renderCheckout() {
+      const checkoutList = document.getElementById('checkoutList');
+      const checkoutTotal = document.getElementById('checkoutTotal');
+      checkoutList.innerHTML = '';
+      let totalPrice = 0;
+
+      cart.forEach(item => {
+        const product = products.find(p => p.id == item.product_id);
+        const itemTotal = product.price * item.quantity;
+        totalPrice += itemTotal;
+
+        const div = document.createElement('div');
+        div.classList.add('item');
+        div.innerHTML = `
+          <h3>${product.name}</h3>
+          <p>Quantity: ${item.quantity}</p>
+          <p>Price: $${itemTotal.toFixed(2)}</p>
+          <hr/>
+        `;
+        checkoutList.appendChild(div);
+      });
+
+      checkoutTotal.innerText = totalPrice.toFixed(2);
+    }
+
+    document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const order = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        address: formData.get('address'),
+        cart: cart,
+        date: new Date().toLocaleString()
+      };
+
+      // Save order to localStorage (simulate "saving")
+      let orders = JSON.parse(localStorage.getItem('orders')) || [];
+      orders.push(order);
+      localStorage.setItem('orders', JSON.stringify(orders));
+
+      // Clear cart
+      localStorage.removeItem('cart');
+
+      // Go to confirmation
+      window.location.href = 'confirmation.html';
+    });
+  </script>
+</body>
+</html>

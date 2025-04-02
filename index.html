@@ -1,85 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>E-commerce Site with Auth0</title>
-  <link href="style.css" rel="stylesheet" type="text/css" />
-  <!-- Auth0 SDK -->
-  <script src="https://cdn.auth0.com/js/auth0-spa-js/1.19/auth0-spa-js.production.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="logo">ShopLogo</div>
-    <div class="menu-toggle" id="mobile-menu">
-      <span></span>
-      <span></span>
-      <span></span>
+<body class="">
+    
+    <div class="container">
+        <header>
+            <div class="title">PRODUCT LIST</div>
+            <div class="icon-cart">
+                <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 15a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0h8m-8 0-1-4m9 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm-9-4h10l2-7H3m2 7L3 4m0 0-.792-3H1"/>
+                </svg>
+                <span>0</span>
+            </div>
+        </header>
+        <div class="listProduct">
+
+        </div>
     </div>
-    <ul id="nav-links">
-      <li><a href="#">Home</a></li>
-      <li><a href="#">Shop</a></li>
-      <li><a href="#">Deals</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
-    <div class="search-cart">
-      <input type="text" id="nav-search" placeholder="Search..." />
-      <button id="nav-search-btn">Search</button>
-      <button id="cart-btn">Cart (<span id="cart-count">0</span>)</button>
-      <!-- Auth0 Login/Logout -->
-      <button id="login">Login</button>
-      <button id="logout" style="display:none;">Logout</button>
+    <!-- <div class="cartTab">
+        <h1>Shopping Cart</h1>
+        <div class="listCart">
+            
+        </div>
+        <div class="btn">
+            <button class="close">CLOSE</button>
+            <button class="checkOut">Check Out</button>
+        </div>
+    </div> -->
+    <div class="cartTab">
+        <h1>Shopping Cart</h1>
+        <div class="listCart"></div>
+        <div class="totalAmount">
+            Total: $<span id="totalPrice">0</span>
+        </div>
+        <div class="btn">
+            <button class="close">CLOSE</button>
+            <button class="checkOut">Check Out</button>
+        </div>
     </div>
-  </nav>
+    <button class="checkOut" onclick="window.location.href='checkout.html'">Check Out</button>
 
-  <!-- Header (Hero Section) -->
-  <header class="hero">
-    <h1>Welcome to Our E-commerce Store</h1>
-    <p>Find the best products at unbeatable prices!</p>
-  </header>
+    
 
-  <!-- Category Filters -->
-  <section class="filters">
-    <button class="filter-btn" data-category="all">All</button>
-    <button class="filter-btn" data-category="electronics">Electronics</button>
-    <button class="filter-btn" data-category="clothing">Clothing</button>
-    <button class="filter-btn" data-category="accessories">Accessories</button>
-  </section>
-
-  <!-- Product Listing -->
-  <section class="product-listing">
-    <!-- Product cards dynamically populated by JS -->
-  </section>
-
-  <!-- Cart Modal -->
-<!-- Cart Modal -->
-<div id="cart-modal" class="modal">
-  <div class="modal-content">
-    <span class="close" id="close-cart">&times;</span>
-    <h2>Your Cart</h2>
-    <ul id="cart-items-list"></ul>
-    <button id="checkout-btn" class="checkout-btn">Checkout</button>
-  </div>
-</div>
-
-
-
-  <!-- Modal -->
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <span id="modal-close">&times;</span>
-      <h2>Product Details</h2>
-      <p id="modal-text">Product description here.</p>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 E-commerce Store. All rights reserved.</p>
-  </footer>
-
-  <script src="index.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
