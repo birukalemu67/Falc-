@@ -8,13 +8,88 @@
     <script src="https://cdn.auth0.com/js/auth0-spa-js/1.28/auth0-spa-js.production.js"></script>
 </head>
 <body class="">
+
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.28/auth0-spa-js.production.js"></script>
+<script>
+  let auth0Client;
+
+  const initAuth0 = async () => {
+    auth0Client = await createAuth0Client({
+      domain: "dev-w1dec3w1uj8hl5pr.us.auth0.com",
+      client_id: "m3GMZ4bXVrZflYm5HCe5q7MDPXS66Kg6",
+      cacheLocation: "localstorage"
+    });
+
+    // Handle redirect back from Auth0
+    if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
+      await auth0Client.handleRedirectCallback();
+      window.history.replaceState({}, document.title, "/");
+    }
+
+    updateUI();
+  };
+
+  const updateUI = async () => {
+    const isAuthenticated = await auth0Client.isAuthenticated();
+
+    const loginBtn = document.getElementById('loginBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const welcomeSpan = document.getElementById('welcome');
+
+    if (isAuthenticated) {
+      const user = await auth0Client.getUser();
+      welcomeSpan.innerText = `Welcome, ${user.name}`;
+      loginBtn.style.display = "none";
+      logoutBtn.style.display = "inline-block";
+    } else {
+      welcomeSpan.innerText = "";
+      loginBtn.style.display = "inline-block";
+      logoutBtn.style.display = "none";
+    }
+  };
+
+  document.getElementById('loginBtn').addEventListener('click', async () => {
+    await auth0Client.loginWithRedirect({
+      authorizationParams: {
+        redirect_uri: window.location.origin
+      }
+    });
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', () => {
+    auth0Client.logout({
+      logoutParams: {
+        returnTo: window.location.origin
+      }
+    });
+  });
+
+  window.requireLogin = async () => {
+    const isAuthenticated = await auth0Client.isAuthenticated();
+    if (!isAuthenticated) {
+      alert("Please log in to continue to checkout.");
+      await auth0Client.loginWithRedirect({
+        authorizationParams: {
+          redirect_uri: window.location.origin
+        }
+      });
+      return false;
+    }
+    return true;
+  };
+
+  window.onload = initAuth0;
+</script>
+
     
     <div class="container">
         <header>
-            <div>
-                <button onclick="login()">Log In</button>
-                <button onclick="logout()">Log Out</button>
+            <div id="auth-buttons" style="margin: 20px;">
+                <button id="loginBtn">Login</button>
+                <button id="logoutBtn">Logout</button>
+                <span id="welcome"></span>
               </div>
+              
               
             <div class="title">PRODUCT LIST</div>
             <div class="icon-cart">

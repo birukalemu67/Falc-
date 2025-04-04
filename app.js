@@ -1,47 +1,4 @@
 
-        let auth0Client;
-        const initAuth0 = async () => {
-          auth0Client = await createAuth0Client({
-            domain: "dev-w1dec3w1uj8hl5pr.us.auth0.com",
-            client_id: "m3GMZ4bXVrZflYm5HCe5q7MDPXS66Kg6",
-            cacheLocation: 'localstorage'
-          });
-      
-          const isAuthenticated = await auth0Client.isAuthenticated();
-          if (isAuthenticated) {
-            const user = await auth0Client.getUser();
-            console.log("Logged in as:", user.name);
-          }
-        };
-      
-        window.login = async () => {
-          await auth0Client.loginWithRedirect({
-            authorizationParams: {
-              redirect_uri: window.location.origin
-            }
-          });
-        };
-      
-        window.logout = () => {
-          auth0Client.logout({
-            logoutParams: {
-              returnTo: window.location.origin
-            }
-          });
-        };
-      
-        window.requireLogin = async () => {
-          const isAuthenticated = await auth0Client.isAuthenticated();
-          if (!isAuthenticated) {
-            alert("Please log in to continue to checkout.");
-            await login();
-            return false;
-          }
-          return true;
-        };
-      
-        window.onload = initAuth0;
-    
 
 let listProductHTML = document.querySelector('.listProduct');
 let listCartHTML = document.querySelector('.listCart');
@@ -151,9 +108,10 @@ const addCartToHTML = () => {
 document.querySelector('.checkOut').addEventListener('click', async () => {
     const isAllowed = await requireLogin();
     if (isAllowed) {
-        window.location.href = 'checkout.html';
+      window.location.href = 'checkout.html';
     }
-});
+  });
+  
 
 
 listCartHTML.addEventListener('click', (event) => {
