@@ -5,11 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.28/auth0-spa-js.production.js"></script>
 </head>
 <body class="">
     
     <div class="container">
         <header>
+            <div>
+                <button onclick="login()">Log In</button>
+                <button onclick="logout()">Log Out</button>
+              </div>
+              
             <div class="title">PRODUCT LIST</div>
             <div class="icon-cart">
                 <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
@@ -44,6 +50,51 @@
         </div>
     </div>
     <button class="checkOut" onclick="window.location.href='checkout.html'">Check Out</button>
+
+    <script>
+        let auth0Client;
+        const initAuth0 = async () => {
+          auth0Client = await createAuth0Client({
+            domain: "YOUR_DOMAIN",
+            client_id: "YOUR_CLIENT_ID",
+            cacheLocation: 'localstorage'
+          });
+      
+          const isAuthenticated = await auth0Client.isAuthenticated();
+          if (isAuthenticated) {
+            const user = await auth0Client.getUser();
+            console.log("Logged in as:", user.name);
+          }
+        };
+      
+        window.login = async () => {
+          await auth0Client.loginWithRedirect({
+            authorizationParams: {
+              redirect_uri: window.location.origin
+            }
+          });
+        };
+      
+        window.logout = () => {
+          auth0Client.logout({
+            logoutParams: {
+              returnTo: window.location.origin
+            }
+          });
+        };
+      
+        window.requireLogin = async () => {
+          const isAuthenticated = await auth0Client.isAuthenticated();
+          if (!isAuthenticated) {
+            alert("Please log in to continue to checkout.");
+            await login();
+            return false;
+          }
+          return true;
+        };
+      
+        window.onload = initAuth0;
+      </script>
 
     
 

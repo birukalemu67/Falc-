@@ -103,10 +103,13 @@ const addCartToHTML = () => {
 }
 
 
-document.querySelector('.checkOut').addEventListener('click', () => {
-    window.location.href = 'checkout.html';
-  });
-  
+document.querySelector('.checkOut').addEventListener('click', async () => {
+    const isAllowed = await requireLogin();
+    if (isAllowed) {
+        window.location.href = 'checkout.html';
+    }
+});
+
 
 listCartHTML.addEventListener('click', (event) => {
     let positionClick = event.target;
