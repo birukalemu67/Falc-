@@ -8,6 +8,46 @@ document.addEventListener('DOMContentLoaded', () => {
   const totalPriceEl = document.getElementById('totalPrice');
   const checkoutBtn = document.querySelector('.checkOut');
 
+
+  const auth0 = new auth0Spa.Auth0Client({
+    domain: 'dev-w1dec3w1uj8hl5pr.us.auth0.com',
+    clientId: 'QbEE5GmUEHXU9ZaaUsONo3WbgLJJTye1',
+    authorizationParams: {
+      redirect_uri: window.location.origin
+    }
+  });
+
+
+  // Login function
+async function login() {
+  await auth0.loginWithRedirect();
+}
+
+// Logout function
+function logout() {
+  auth0.logout({
+    logoutParams: {
+      returnTo: window.location.origin
+    }
+  });
+}
+
+// Check authentication status
+async function checkAuth() {
+  const isAuthenticated = await auth0.isAuthenticated();
+  if (isAuthenticated) {
+    const user = await auth0.getUser();
+    console.log("Logged in user:", user);
+    document.querySelector('.title').innerText = `Welcome, ${user.name}`;
+  } else {
+    document.querySelector('.title').innerText = 'PRODUCT LIST';
+  }
+}
+
+// Call checkAuth when DOM loads
+document.addEventListener('DOMContentLoaded', checkAuth);
+
+  
   let products = [];
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
