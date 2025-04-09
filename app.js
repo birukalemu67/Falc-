@@ -121,9 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCart();
   });
 
-  // Checkout functionality without Auth0
+  // Checkout functionality
   checkoutBtn.addEventListener('click', () => {
-    window.location.href = 'checkout.html';
+    window.location.href = 'Checkout.html';
   });
 
   loadProducts();
