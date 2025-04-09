@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const body = document.querySelector('body');
   const closeCartBtn = document.querySelector('.close');
   const totalPriceEl = document.getElementById('totalPrice');
-  
+  const checkoutBtn = document.querySelector('.checkOut');
+
   let products = [];
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
@@ -120,16 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCart();
   });
 
-  // Checkout functionality with Auth0
-  document.querySelector('.checkOut').addEventListener('click', async () => {
-    if (typeof requireLogin === 'function') {
-      const isLoggedIn = await requireLogin();
-      if (isLoggedIn) {
-        window.location.href = 'checkout.html';
-      }
-    } else {
-      alert('Authentication setup incomplete.');
-    }
+  // Checkout functionality without Auth0
+  checkoutBtn.addEventListener('click', () => {
+    window.location.href = 'checkout.html';
   });
 
   loadProducts();
