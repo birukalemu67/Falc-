@@ -1,14 +1,13 @@
-
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Product List</title>
   <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/1.28/auth0-spa-js.production.js"></script>
 </head>
 <body>
-
 
   <div class="container">
     <header>
@@ -42,14 +41,8 @@
     </div>
   </div>
 
-  <button class="checkOut" onclick="window.location.href='checkout.html'">Check Out</button>
-
-  <!-- ✅ Auth0 SDK -->
-
-
-  <!-- ✅ Auth0 Logic -->
   <script>
-    window.addEventListener('DOMContentLoaded', async () => {
+    document.addEventListener('DOMContentLoaded', async () => {
       const auth0Client = await createAuth0Client({
         domain: "dev-w1dec3w1uj8hl5pr.us.auth0.com",
         client_id: "QbEE5GmUEHXU9ZaaUsONo3WbgLJJTye1",
@@ -66,33 +59,15 @@
       const welcomeSpan = document.getElementById("welcome");
 
       loginBtn.addEventListener("click", async () => {
-        await auth0Client.loginWithRedirect({
-          authorizationParams: {
-            redirect_uri: window.location.origin
-          }
-        });
-      });
-
-      logoutBtn.addEventListener("click", () => {
-        auth0Client.logout({
-          logoutParams: {
-            returnTo: window.location.origin
-          }
-        });
-      });
-      loginBtn.addEventListener("click", async () => {
-        console.log("Login button clicked");
         try {
-            await auth0Client.loginWithRedirect({
-            authorizationParams: {
-                redirect_uri: window.location.origin
-            }
-            });
+          await auth0Client.loginWithRedirect({ authorizationParams: { redirect_uri: window.location.origin } });
         } catch (err) {
-            console.error("Error during loginWithRedirect:", err);
+          console.error("Login error:", err);
+          alert("Login error: " + err.message);
         }
-        });
+      });
 
+      logoutBtn.addEventListener("click", () => auth0Client.logout({ logoutParams: { returnTo: window.location.origin } }));
 
       const isAuthenticated = await auth0Client.isAuthenticated();
       if (isAuthenticated) {
@@ -101,7 +76,6 @@
         loginBtn.style.display = "none";
         logoutBtn.style.display = "inline-block";
       } else {
-        welcomeSpan.textContent = "";
         loginBtn.style.display = "inline-block";
         logoutBtn.style.display = "none";
       }
@@ -110,11 +84,7 @@
         const isAuth = await auth0Client.isAuthenticated();
         if (!isAuth) {
           alert("Please log in to continue to checkout.");
-          await auth0Client.loginWithRedirect({
-            authorizationParams: {
-              redirect_uri: window.location.origin
-            }
-          });
+          await auth0Client.loginWithRedirect({ authorizationParams: { redirect_uri: window.location.origin } });
           return false;
         }
         return true;
@@ -122,14 +92,6 @@
     });
   </script>
 
-  <!-- ✅ Your main app logic -->
   <script src="app.js"></script>
-  <!-- ✅ Latest Auth0 SDK -->
-<script src="https://cdn.auth0.com/js/auth0-spa-js/1.28/auth0-spa-js.production.js"></script>
-
- 
-
-  <script src="auth.js"></script>
-
 </body>
 </html>
