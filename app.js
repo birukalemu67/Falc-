@@ -1,3 +1,11 @@
+const auth0 = new auth0Spa.Auth0Client({
+  domain: 'dev-w1dec3w1uj8hl5pr.us.auth0.com',
+  clientId: 'QbEE5GmUEHXU9ZaaUsONo3WbgLJJTye1',
+  authorizationParams: {
+    redirect_uri: window.location.origin
+  }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   const listProductHTML = document.querySelector('.listProduct');
   const listCartHTML = document.querySelector('.listCart');
@@ -9,13 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const checkoutBtn = document.querySelector('.checkOut');
 
 
-  const auth0 = new auth0Spa.Auth0Client({
-    domain: 'dev-w1dec3w1uj8hl5pr.us.auth0.com',
-    clientId: 'QbEE5GmUEHXU9ZaaUsONo3WbgLJJTye1',
-    authorizationParams: {
-      redirect_uri: window.location.origin
-    }
-  });
+  
 
 
   // Login function
