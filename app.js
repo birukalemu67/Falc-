@@ -1,5 +1,5 @@
 // Initialize Auth0 correctly
-const auth0 = new auth0.Auth0Client({
+const auth0 = new auth0Spa.Auth0Client({
   domain: 'dev-w1dec3w1uj8hl5pr.us.auth0.com',
   clientId: 'QbEE5GmUEHXU9ZaaUsONo3WbgLJJTye1',
   authorizationParams: {
