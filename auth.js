@@ -4,7 +4,7 @@ let auth0Client = null;
 const configureClient = async () => {
   auth0Client = await createAuth0Client({
     domain: 'dev-w1dec3w1uj8hl5pr.us.auth0.com',
-    client_id: 'your_client_id_here',
+    client_id: 'QbEE5GmUEHXU9ZaaUsONo3WbgLJJTye1',
     cacheLocation: 'localstorage',
   });
 };
