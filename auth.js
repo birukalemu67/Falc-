@@ -78,63 +78,59 @@ async function updateUI() {
 
  
 
-  // Select protected nav items dynamically inside function
+  // Select elements
 
-  const loginBtn = document.getElementById("loginBtn");
-  const logoutBtn = document.getElementById("logoutBtn");
-  
+  const loginBtn = document.getElementById("login-btn");
+
+  const logoutBtn = document.getElementById("logout-btn");
 
   const protectedContent = document.getElementById("protected-content");
 
   const protectedLinks = document.querySelectorAll(".protected-link");
 
+  const usernameElem = document.getElementById("username"); // Select username element too
+
  
 
   if (isAuthenticated) {
 
-      // Show protected links
+      // Show protected links (safe, querySelectorAll returns empty list, not null)
 
       protectedLinks.forEach(link => {
 
-          link.style.display = "inline-block"; // Or 'block' depending on your layout
+          link.style.display = "inline-block";
 
       });
 
  
 
-      // Show Logout button, hide Login button
+      // Show/hide buttons WITH CHECKS
 
-      loginBtn.style.display = "none";
+      if (loginBtn) loginBtn.style.display = "none";         // Check if loginBtn exists
 
-      logoutBtn.style.display = "inline-block";
+      if (logoutBtn) logoutBtn.style.display = "inline-block"; // Check if logoutBtn exists
 
  
 
-      // Show protected content
+      // Show protected content (already has a check)
 
       if (protectedContent) protectedContent.style.display = "block";
 
  
 
-      // Get user's profile
+      // Get and display user info
 
       const user = await auth0Client.getUser();
 
       console.log("Auth0 user profile:", user);
 
- 
-
-      // Display user's name
-
-      const usernameElem = document.getElementById("username");
-
-      if (usernameElem) {
-
-          // Use nickname, name, or email as available, fallback to "User"
+      if (usernameElem) { // Check if usernameElem exists
 
           usernameElem.textContent = user.nickname || user.name || user.email || "User";
 
       }
+
+ 
 
   } else {
 
@@ -148,25 +144,23 @@ async function updateUI() {
 
  
 
-      // Show Login button, hide Logout button
+      // Show/hide buttons WITH CHECKS
 
-      loginBtn.style.display = "inline-block";
+      if (loginBtn) loginBtn.style.display = "inline-block"; // Check if loginBtn exists
 
-      logoutBtn.style.display = "none";
+      if (logoutBtn) logoutBtn.style.display = "none";        // Check if logoutBtn exists
 
  
 
-      // Hide protected content
+      // Hide protected content (already has a check)
 
       if (protectedContent) protectedContent.style.display = "none";
 
  
 
-      // Clear username display if it exists
+      // Clear username display
 
-      const usernameElem = document.getElementById("username");
-
-      if (usernameElem) {
+      if (usernameElem) { // Check if usernameElem exists
 
         usernameElem.textContent = "";
 
@@ -175,7 +169,6 @@ async function updateUI() {
   }
 
 }
-
  
 
 /**
