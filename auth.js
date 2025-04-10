@@ -27,6 +27,17 @@ window.onload = async () => {
     logoutBtn.style.display = 'none';
   }
 
-  loginBtn.addEventListener('click', () => auth0Client.loginWithRedirect());
-  logoutBtn.addEventListener('click', () => auth0Client.logout({ returnTo: window.location.origin }));
+  loginBtn.addEventListener('click', () => {
+    auth0Client.loginWithRedirect({
+      authorizationParams: {
+        redirect_uri: window.location.origin,
+      },
+    });
+  });
+
+  logoutBtn.addEventListener('click', () => {
+    auth0Client.logout({
+      returnTo: window.location.origin,
+    });
+  });
 };
