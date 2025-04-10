@@ -8,10 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const totalPriceEl = document.getElementById('totalPrice');
   const checkoutBtn = document.querySelector('.checkOut');
   
-  if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
-    await auth0Client.handleRedirectCallback();
-    window.history.replaceState({}, document.title, "/");
-  }
   
 
   let products = [];
