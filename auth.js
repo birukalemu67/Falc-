@@ -1,25 +1,27 @@
-// auth.js
-let auth0Client = null;
+let auth0Client;
 
-const configureClient = async () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  // Initialize Auth0 client
   auth0Client = await createAuth0Client({
     domain: 'dev-w1dec3w1uj8hl5pr.us.auth0.com',
-    client_id: 'QbEE5GmUEHXU9ZaaUsONo3WbgLJJTye1',
+    client_id: 'QbEE5GmUEHXU9ZaaUs0No3WbgLJJTye1',
     cacheLocation: 'localstorage',
   });
-};
 
-window.onload = async () => {
-  await configureClient();
+  // Handle redirect after login
+  const query = window.location.search;
+  if (query.includes("code=") && query.includes("state=")) {
+    await auth0Client.handleRedirectCallback();
+    window.history.replaceState({}, document.title, "/");
+  }
 
-  const isAuthenticated = await auth0Client.isAuthenticated();
-
+  // UI buttons
   const loginBtn = document.getElementById('loginBtn');
   const logoutBtn = document.getElementById('logoutBtn');
 
+  const isAuthenticated = await auth0Client.isAuthenticated();
+
   if (isAuthenticated) {
-    const user = await auth0Client.getUser();
-    document.getElementById('userInfo').innerText = `Hi, ${user.name}`;
     loginBtn.style.display = 'none';
     logoutBtn.style.display = 'inline-block';
   } else {
@@ -27,6 +29,7 @@ window.onload = async () => {
     logoutBtn.style.display = 'none';
   }
 
+  // ✅ Your Requested Code:
   loginBtn.addEventListener('click', () => {
     auth0Client.loginWithRedirect({
       authorizationParams: {
@@ -40,4 +43,4 @@ window.onload = async () => {
       returnTo: window.location.origin,
     });
   });
-};
+});
