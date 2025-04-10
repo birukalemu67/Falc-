@@ -35,6 +35,25 @@
   </style>
 </head>
 <body>
+
+
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/1.20/auth0-spa-js.production.js"></script>
+  <script>
+    const domain = "dev-w1dec3w1uj8hl5pr.us.auth0.com";
+    const clientId = "your_client_id_here";
+
+    async function protectPage() {
+      const auth0 = await createAuth0Client({ domain, client_id: clientId });
+      const isAuthenticated = await auth0.isAuthenticated();
+      if (!isAuthenticated) {
+        alert("You must be logged in to view the checkout page.");
+        window.location.href = "index.html";
+      }
+    }
+
+  protectPage();
+</script>
+
   
 
   <div class="container">
