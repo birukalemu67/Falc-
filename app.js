@@ -1,4 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
+  if (window.location.search.includes("code=") && window.location.search.includes("state=")) {
+    await auth0Client.handleRedirectCallback();
+    window.history.replaceState({}, document.title, "/");
+  }
+  
+
   const listProductHTML = document.querySelector('.listProduct');
   const listCartHTML = document.querySelector('.listCart');
   const iconCart = document.querySelector('.icon-cart');
@@ -8,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const totalPriceEl = document.getElementById('totalPrice');
   const checkoutBtn = document.querySelector('.checkOut');
   
+
 
   let products = [];
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
