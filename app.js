@@ -1,3 +1,4 @@
+// Initialize Auth0 correctly
 const auth0 = new auth0.Auth0Client({
   domain: 'dev-w1dec3w1uj8hl5pr.us.auth0.com',
   clientId: 'QbEE5GmUEHXU9ZaaUsONo3WbgLJJTye1',
@@ -6,26 +7,12 @@ const auth0 = new auth0.Auth0Client({
   }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  const listProductHTML = document.querySelector('.listProduct');
-  const listCartHTML = document.querySelector('.listCart');
-  const iconCart = document.querySelector('.icon-cart');
-  const iconCartSpan = document.querySelector('.icon-cart span');
-  const body = document.querySelector('body');
-  const closeCartBtn = document.querySelector('.close');
-  const totalPriceEl = document.getElementById('totalPrice');
-  const checkoutBtn = document.querySelector('.checkOut');
-
-
-  
-
-
-  // Login function
+// Global login function
 async function login() {
   await auth0.loginWithRedirect();
 }
 
-// Logout function
+// Global logout function
 function logout() {
   auth0.logout({
     logoutParams: {
@@ -34,7 +21,7 @@ function logout() {
   });
 }
 
-// Check authentication status
+// Global check authentication status function
 async function checkAuth() {
   const isAuthenticated = await auth0.isAuthenticated();
   if (isAuthenticated) {
@@ -46,10 +33,19 @@ async function checkAuth() {
   }
 }
 
-// Call checkAuth when DOM loads
-document.addEventListener('DOMContentLoaded', checkAuth);
+// Single DOMContentLoaded event
+document.addEventListener('DOMContentLoaded', () => {
+  checkAuth();  // Check authentication status immediately after DOM loads.
 
-  
+  const listProductHTML = document.querySelector('.listProduct');
+  const listCartHTML = document.querySelector('.listCart');
+  const iconCart = document.querySelector('.icon-cart');
+  const iconCartSpan = document.querySelector('.icon-cart span');
+  const body = document.querySelector('body');
+  const closeCartBtn = document.querySelector('.close');
+  const totalPriceEl = document.getElementById('totalPrice');
+  const checkoutBtn = document.querySelector('.checkOut');
+
   let products = [];
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
