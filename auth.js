@@ -30,13 +30,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // ✅ Your Requested Code:
-  loginBtn.addEventListener('click', () => {
-    auth0Client.loginWithRedirect({
-      authorizationParams: {
-        redirect_uri: window.location.origin,
-      },
-    });
+  auth0Client.loginWithRedirect({
+    authorizationParams: {
+      redirect_uri: window.location.origin,
+    }
   });
+  ;
 
   logoutBtn.addEventListener('click', () => {
     auth0Client.logout({
