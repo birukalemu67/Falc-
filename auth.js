@@ -80,9 +80,9 @@ async function updateUI() {
 
   // Select protected nav items dynamically inside function
 
-  const loginBtn = document.getElementById("login-btn");
-
-  const logoutBtn = document.getElementById("logout-btn");
+  const loginBtn = document.getElementById("loginBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
+  
 
   const protectedContent = document.getElementById("protected-content");
 
