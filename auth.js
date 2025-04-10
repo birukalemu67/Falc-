@@ -8,6 +8,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     cacheLocation: 'localstorage',
   });
 
+  if (userInfo) {
+    userInfo.innerHTML = `<p><strong>Welcome:</strong> ${user.name || user.email}</p>`;
+  }
+  
+
   // Handle redirect back from Auth0
   const query = window.location.search;
   if (query.includes("code=") && query.includes("state=")) {

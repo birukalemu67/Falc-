@@ -8,6 +8,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const totalPriceEl = document.getElementById('totalPrice');
   const checkoutBtn = document.querySelector('.checkOut');
 
+  
+  const userInfo = document.getElementById('userInfo');
+  if (userInfo) {
+    userInfo.innerHTML = `<p><strong>Welcome:</strong> ${user.name || user.email}</p>`;
+  }
+  
+
+
+
   let products = [];
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
