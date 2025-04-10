@@ -29,17 +29,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     logoutBtn.style.display = 'none';
   }
 
-  // ✅ Your Requested Code:
   auth0Client.loginWithRedirect({
     authorizationParams: {
       redirect_uri: window.location.origin,
     }
   });
-  ;
+  
 
-  logoutBtn.addEventListener('click', () => {
-    auth0Client.logout({
+  auth0Client.logout({
+    logoutParams: {
       returnTo: window.location.origin,
-    });
+    }
   });
-});
+}  
