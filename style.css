@@ -1,163 +1,158 @@
+/* ───────── Base layout (unchanged) ───────── */
 body{
-    margin: 0;
-    font-family: Poppins;
+    margin:0;
+    font-family:Poppins, sans-serif;
 }
 .container{
-    width: 900px;
-    margin: auto;
-    max-width: 90vw;
-    text-align: center;
-    padding-top: 10px;
-    transition: transform .5s;
+    width:900px;
+    margin:auto;
+    max-width:90vw;
+    text-align:center;
+    padding-top:10px;
+    transition:transform .5s;
 }
-svg{
-    width: 30px;
-}
+svg{width:30px;}
 header{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 0;
 }
-.icon-cart{
-    position: relative;
-}
+.icon-cart{position:relative;}
 .icon-cart span{
-    position: absolute;
-    background-color: red;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    color: #fff;
-    top: 50%;
-    right: -20px;
+    position:absolute;
+    background-color:red;
+    width:30px;height:30px;
+    display:flex;justify-content:center;align-items:center;
+    border-radius:50%;
+    color:#fff;
+    top:50%;right:-20px;
 }
-.title{
-    font-size: xx-large;
-}
-.listProduct .item img{
-    width: 90%;
-    filter: drop-shadow(0 50px 20px #0009);
-}
+.title{font-size:xx-large;}
+
 .listProduct{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
 }
 .listProduct .item{
-    background-color: #EEEEE6;
-    padding: 20px;
-    border-radius: 20px;
+    background-color:#EEEEE6;
+    padding:20px;
+    border-radius:20px;
 }
-.listProduct .item h2{
-    font-weight: 500;
-    font-size: large;
+.listProduct .item img{
+    width:90%;
+    filter:drop-shadow(0 50px 20px #0009);
 }
-.listProduct .item .price{
-    letter-spacing: 7px;
-    font-size: small;
-}
+.listProduct .item h2{font-weight:500;font-size:large;}
+.listProduct .item .price{letter-spacing:7px;font-size:small;}
 .listProduct .item button{
-    background-color: #353432;
-    color: #eee;
-    border: none;
-    padding: 5px 10px;
-    margin-top: 10px;
-    border-radius: 20px;
+    background-color:#353432;
+    color:#eee;border:none;
+    padding:5px 10px;margin-top:10px;
+    border-radius:20px;
 }
 
-/* cart */
+/* cart side panel */
 .cartTab{
-    width: 400px;
-    background-color: #353432;
-    color: #eee;
-    position: fixed;
-    top: 0;
-    right: -400px;
-    bottom: 0;
-    display: grid;
-    grid-template-rows: 70px 1fr 70px;
-    transition: .5s;
+    width:400px;
+    background-color:#353432;
+    color:#eee;
+    position:fixed;
+    top:0;right:-400px;bottom:0;
+    display:grid;
+    grid-template-rows:70px 1fr 70px;
+    transition:.5s;
 }
-body.showCart .cartTab{
-    right: 0;
-}
-body.showCart .container{
-    transform: translateX(-250px);
-}
-.cartTab h1{
-    padding: 20px;
-    margin: 0;
-    font-weight: 300;
-}
+body.showCart .cartTab{right:0;}
+body.showCart .container{transform:translateX(-250px);}
+.cartTab h1{padding:20px;margin:0;font-weight:300;}
+
 .cartTab .btn{
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
 }
-.cartTab button{
-    background-color: #E8BC0E;
-    border: none;
-    font-family: Poppins;
-    font-weight: 500;
-    cursor: pointer;
+
+/* ----- NEW: prettier Checkout & Close buttons ----- */
+.cartTab .btn button{
+    font-family:Poppins,sans-serif;
+    font-weight:600;
+    letter-spacing:.4px;
+    padding:12px 0;
+    border:none;
+    outline:0;
+    transition:.25s cubic-bezier(.4,0,.2,1);
 }
-.cartTab .close{
-    background-color: #eee;
+.cartTab .btn .checkout{
+    background-image:linear-gradient(135deg,#e8bc0e 0%,#ffc047 100%);
+    color:#353432;
+    border-radius:0 0 0 12px;
 }
-.listCart .item img{
-    width: 100%;
+.cartTab .btn .checkout:hover{
+    box-shadow:inset 0 -60px 0 rgba(0,0,0,.05);
 }
+.cartTab .btn .close{
+    background:#eee;
+    color:#353432;
+    border-radius:0 0 12px 0;
+}
+.cartTab .btn .close:hover{background:#dcdcdc;}
+
+@media(max-width:480px){
+    .cartTab .btn{grid-template-columns:1fr;}
+    .cartTab .btn button{border-radius:0!important;}
+    .cartTab .btn .checkout{border-top-left-radius:12px;border-top-right-radius:12px;}
+    .cartTab .btn .close{border-bottom-left-radius:12px;border-bottom-right-radius:12px;}
+}
+
+/* cart item list */
+.listCart{overflow:auto;}
 .listCart .item{
-    display: grid;
-    grid-template-columns: 70px 150px 50px 1fr;
-    gap: 10px;
-    text-align: center;
-    align-items: center;
+    display:grid;
+    grid-template-columns:70px 150px 50px 1fr;
+    gap:10px;text-align:center;align-items:center;
 }
+.listCart .item img{width:100%;}
 .listCart .quantity span{
-    display: inline-block;
-    width: 25px;
-    height: 25px;
-    background-color: #eee;
-    border-radius: 50%;
-    color: #555;
-    cursor: pointer;
+    display:inline-block;width:25px;height:25px;
+    background:#eee;border-radius:50%;color:#555;
+    cursor:pointer;
 }
 .listCart .quantity span:nth-child(2){
-    background-color: transparent;
-    color: #eee;
-    cursor: auto;
+    background:transparent;color:#eee;cursor:auto;
 }
-.listCart .item:nth-child(even){
-    background-color: #eee1;
+.listCart .item:nth-child(even){background-color:#eee1;}
+.listCart::-webkit-scrollbar{width:0;}
+
+/* responsive product grid */
+@media(max-width:992px){
+    .listProduct{grid-template-columns:repeat(3,1fr);}
 }
-.listCart{
-    overflow: auto;
-}
-.listCart::-webkit-scrollbar{
-    width: 0;
-}
-@media only screen and (max-width: 992px) {
-    .listProduct{
-        grid-template-columns: repeat(3, 1fr);
-    }
+@media(max-width:768px){
+    .listProduct{grid-template-columns:repeat(2,1fr);}
 }
 
-
-/* mobile */
-@media only screen and (max-width: 768px) {
-    .listProduct{
-        grid-template-columns: repeat(2, 1fr);
-    }
+/* ----- NEW: prettier Login / Logout buttons ----- */
+.auth-buttons{
+    position:absolute;top:10px;right:20px;
 }
-
-
-.auth-buttons {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-  }
-  
+.auth-buttons button{
+    background-image:linear-gradient(135deg,#e8bc0e 0%,#f8d34e 100%);
+    color:#fff;
+    font-family:Poppins,sans-serif;
+    font-weight:600;
+    letter-spacing:.5px;
+    padding:9px 22px;
+    border:none;border-radius:28px;
+    box-shadow:0 3px 6px rgba(0,0,0,.15);
+    transition:.25s cubic-bezier(.4,0,.2,1);
+    cursor:pointer;
+}
+.auth-buttons button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 6px 12px rgba(0,0,0,.18);
+}
+.auth-buttons button:active{
+    transform:translateY(0);
+    box-shadow:0 2px 4px rgba(0,0,0,.15);
+}
