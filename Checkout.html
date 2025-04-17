@@ -5,37 +5,127 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Checkout</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="logo.png" />
   <style>
-    form {
-      max-width: 600px;
-      margin: auto;
+    body {
+      font-family: Poppins, sans-serif;
+      margin: 0;
+      background-color: #f5f6fa;
+    }
+
+    header {
+      background-color: #353432;
+      padding: 15px 20px;
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      color: white;
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
       gap: 10px;
     }
+
+    header .logo img {
+      height: 40px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 40px 20px;
+      background: white;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      border-radius: 12px;
+      margin-top: 30px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #353432;
+      margin-bottom: 30px;
+    }
+
+    #checkoutList .item {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: #fafafa;
+    }
+
+    .totalAmount {
+      font-size: 1.2em;
+      text-align: right;
+      font-weight: bold;
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
     input, textarea {
-      padding: 10px;
+      padding: 12px 15px;
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 1em;
+      background-color: #fefefe;
     }
+
     button {
-      padding: 10px;
+      padding: 12px;
       background-color: #E8BC0E;
+      color: #353432;
+      font-weight: bold;
       border: none;
       border-radius: 8px;
-      font-weight: bold;
+      font-size: 1em;
       cursor: pointer;
+      transition: 0.2s ease;
     }
+
+    button:hover {
+      background-color: #ffd940;
+    }
+
     @media (max-width: 600px) {
-      .item {
-        font-size: 0.9em;
+      .container {
+        padding: 20px 15px;
       }
     }
   </style>
 </head>
 <body>
 
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="FALC Logo">
+      <span>FALC Checkout</span>
+    </div>
+  </header>
+
+  <div class="container">
+    <h1>Checkout</h1>
+
+    <div id="checkoutList"></div>
+    <div class="totalAmount">
+      Total: $<span id="checkoutTotal">0</span>
+    </div>
+
+    <form id="checkoutForm">
+      <input type="text" name="name" placeholder="Full Name" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <textarea name="address" rows="3" placeholder="Shipping Address" required></textarea>
+      <button type="submit">Place Order</button>
+    </form>
+  </div>
+
+  <!-- Auth0 protection -->
   <script src="https://cdn.auth0.com/js/auth0-spa-js/1.20/auth0-spa-js.production.js"></script>
   <script>
     const domain = "dev-w1dec3w1uj8hl5pr.us.auth0.com";
@@ -59,22 +149,7 @@
     protectPage();
   </script>
 
-  <div class="container">
-    <h1>Checkout</h1>
-
-    <div id="checkoutList"></div>
-    <div class="totalAmount">
-      Total: $<span id="checkoutTotal">0</span>
-    </div>
-
-    <form id="checkoutForm">
-      <input type="text" name="name" placeholder="Full Name" required />
-      <input type="email" name="email" placeholder="Email" required />
-      <textarea name="address" rows="3" placeholder="Shipping Address" required></textarea>
-      <button type="submit">Place Order</button>
-    </form>
-  </div>
-
+  <!-- Checkout logic -->
   <script>
     let products = [];
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -103,7 +178,6 @@
           <h3>${product.name}</h3>
           <p>Quantity: ${item.quantity}</p>
           <p>Price: $${itemTotal.toFixed(2)}</p>
-          <hr/>
         `;
         checkoutList.appendChild(div);
       });
@@ -122,15 +196,11 @@
         date: new Date().toLocaleString()
       };
 
-      // Save order to localStorage (simulate "saving")
       let orders = JSON.parse(localStorage.getItem('orders')) || [];
       orders.push(order);
       localStorage.setItem('orders', JSON.stringify(orders));
-
-      // Clear cart
       localStorage.removeItem('cart');
 
-      // Go to confirmation
       window.location.href = 'confirmation.html';
     });
   </script>
